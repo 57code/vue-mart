@@ -61,10 +61,14 @@
             async handleLogin(e) {
                 e.preventDefault();
                 // console.log('登录');
-                const res = await this.$http.get('/api/login', {params: {
+                // const res = await this.$http.get('/api/login', {params: {
+                //     username: this.model.username,
+                //     password: this.model.password
+                // }});                
+                const res = await this.$http.post('/api/login', {
                     username: this.model.username,
                     password: this.model.password
-                }});
+                });
                 console.log(res);
                 
                 const {code, token, message} = res.data;
@@ -73,7 +77,7 @@
                     localStorage.setItem('token', token); // 缓存至本地
                     this.$store.commit('setToken', token);// 存入store
                     // 回跳
-                    const {redirect} = this.$route.query || '/';
+                    const redirect = this.$route.query.redirect || '/';
                     this.$router.push(redirect);
                 } else{
                     // 登录失败

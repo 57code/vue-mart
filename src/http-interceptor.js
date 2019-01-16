@@ -28,6 +28,7 @@ axios.interceptors.response.use(
       if (err.response.status === 401) { // 未授权
         clearHandler()
       }
+      return Promise.reject(err);
   }
 );
 
