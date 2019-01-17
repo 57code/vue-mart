@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <transition name="route-move">
+    <transition :name="transitionName">
       <router-view class="child-view"/>
     </transition>
    
@@ -27,13 +27,17 @@ export default {
         { label: "Home", value: "/", icon: "cubeic-home" },
         { label: "Cart", value: "/cart", icon: "cubeic-mall" },
         { label: "Me", value: "/login", icon: "cubeic-person" }
-      ]
+      ],
+      transitionName: 'route-forward'
     };
   },
   watch: {
     // 路由发生变化时，同步tabs选中
     $route(route) {
       this.selectLabel = route.path;
+
+      // 动态设置动画方式
+      this.transitionName = this.$router.transitionName
     }
   },
   created() {
@@ -91,15 +95,23 @@ export default {
 }
 /* 页面滑动动画 */
 /* 入场前 */
-.route-move-enter {
+.route-forward-enter {
   transform: translate3d(-100%, 0, 0);
 }
-/* 出场后 */
-.route-move-leave-to {
+.route-back-enter {
   transform: translate3d(100%, 0, 0);
 }
-.route-move-enter-active,
-.route-move-leave-active {
+/* 出场后 */
+.route-forward-leave-to {
+  transform: translate3d(100%, 0, 0);
+}
+.route-back-leave-to {
+  transform: translate3d(-100%, 0, 0);
+}
+.route-forward-enter-active,
+.route-forward-leave-active,
+.route-back-enter-active,
+.route-back-leave-active {
   transition: transform 0.3s;
 }
 
