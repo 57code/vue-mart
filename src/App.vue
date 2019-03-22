@@ -1,16 +1,22 @@
 <template>
   <div id="app">
-    <hello-world></hello-world>
+    <div id="nav">
+      <router-link to="/">Home</router-link> |
+      <router-link to="/about">About</router-link>
+      <button v-if="$store.state.isLogin" @click="logout">注销</button>
+    </div>
+    <router-view/>
   </div>
 </template>
 
 <script>
-import HelloWorld from '@/components/HelloWorld.vue';
 export default {
-  components: {
-    HelloWorld,
-  }
-};
+  methods: {
+    logout() {
+      this.$store.dispatch('logout')
+    }
+  },
+}
 </script>
 
 
