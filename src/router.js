@@ -2,6 +2,7 @@ import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
 import Login from "./views/Login.vue";
+import Cart from "./views/Cart.vue";
 
 Vue.use(Router);
 
@@ -18,6 +19,11 @@ const router = new Router({
       path: "/login",
       name: "login",
       component: Login
+    },
+    {
+      path: "/cart",
+      name: "cart",
+      component: Cart
     },
     {
       path: "/about",
@@ -47,8 +53,9 @@ router.beforeEach((to, from, next) => {
         query: { redirect: to.path }
       });
     }
-  } else { // 不需要登录验证
-    next()
+  } else {
+    // 不需要登录验证
+    next();
   }
 });
 
