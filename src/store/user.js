@@ -1,12 +1,8 @@
-import Vue from "vue";
-import Vuex from "vuex";
-import us from "./service/user";
+import us from "@/service/user";
 
-Vue.use(Vuex);
-
-export default new Vuex.Store({
+export default {
   state: {
-    isLogin: localStorage.getItem('token') ? true : false
+    isLogin: localStorage.getItem("token") ? true : false
   },
   mutations: {
     setLoginState(state, b) {
@@ -26,11 +22,11 @@ export default new Vuex.Store({
         return code;
       });
     },
-    logout({ commit }){
+    logout({ commit }) {
       // 清缓存
-      localStorage.removeItem('token')
+      localStorage.removeItem("token");
       // 重置状态
       commit("setLoginState", false);
     }
   }
-});
+};

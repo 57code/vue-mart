@@ -4,7 +4,7 @@
       <img src="https://img.kaikeba.com/logo-new.png" alt>
     </div>
     <!-- <cube-button>登录</cube-button> -->
-    <cube-form :model="model" :schema="schema" @submit="handleLogin" @validate="haneldValidate"></cube-form>
+    <cube-form :model="model" :schema="schema" @submit.prevent="handleLogin" @validate="haneldValidate"></cube-form>
   </div>
 </template>
 
@@ -60,7 +60,7 @@ export default {
   methods: {
     handleLogin(e) {
       // 组织表单默认提交行为
-      e.preventDefault();
+      // e.preventDefault();
       // 登录请求
     //   this.login(this.model) // 使用mapActions
       this.$store
