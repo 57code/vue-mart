@@ -1,17 +1,23 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
+    
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+
 
 export default {
-  name: 'home',
-  components: {
-    HelloWorld
-  }
-}
+  name: "home"
+};
 </script>
+style <style lang="stylus" scoped>
+.cube-slide {
+  height: auto;
+}
+
+.cube-slide-item > a > img {
+  width: 100%;
+  height: auto;
+}
+</style>
