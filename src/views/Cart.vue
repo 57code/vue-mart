@@ -13,7 +13,6 @@
     <cube-button :disabled="true" v-if="total<minTotal">还差{{minTotal-total}}可以购买</cube-button>
     <cube-button v-else>
       下单
-      <span v-if="!token">(需要登录)</span>
     </cube-button>
     <!-- <div>
       {{cart}}
@@ -30,8 +29,7 @@ export default {
   },
   computed: {
     ...mapState({
-      cart: state => state.cart,
-      token: state => state.token
+      cart: state => state.cart.cart
     }),
     ...mapGetters({
       total: "total"

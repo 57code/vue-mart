@@ -9,7 +9,7 @@
           <div class="title">{{item.title}}</div>
           <div class="info">
             <span>{{item.count}}人购买</span>
-            <i class="cubeic-add" @click.stop.prevent="addCart(item)"></i>
+            <i class="cubeic-add" @click.stop.prevent="addCart($event, item)"></i>
           </div>
         </div>
       </router-link>
@@ -21,8 +21,9 @@
 export default {
   props: ["data"],
   methods: {
-    addCart(item) {
+    addCart(event, item) {
       this.$store.commit("addcart", item);
+      this.$emit('cartanim', event.target)
     },
     imgPreview(img) {
       this.$createImagePreview({

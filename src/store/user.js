@@ -1,10 +1,6 @@
-import Vue from "vue";
-import Vuex from "vuex";
-import us from "./service/user";
+import us from "@/service/user";
 
-Vue.use(Vuex);
-
-const store = new Vuex.Store({
+export default {
   state: {
     isLogin: localStorage.getItem("token") ? true : false
   },
@@ -33,6 +29,4 @@ const store = new Vuex.Store({
       commit("setLoginState", false);
     }
   }
-});
-
-export default store;
+};

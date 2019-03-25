@@ -3,8 +3,16 @@ import Router from "vue-router";
 import Home from "./views/Home.vue";
 import Login from "./views/Login.vue";
 import Cart from "./views/Cart.vue";
+import History from "./utils/history";
 
+Vue.use(History);
 Vue.use(Router);
+
+// 扩展Router，添加goBack方法
+Router.prototype.goBack = function() {
+  this.isBack = true;
+  this.back();
+};
 
 const router = new Router({
   mode: "history",
@@ -56,6 +64,18 @@ router.beforeEach((to, from, next) => {
   } else {
     // 不需要登录验证
     next();
+  }
+});
+
+// 每次从路由出来以后
+router.afterEach((to, from) => {
+  if (router.isBack) {
+    History.pop();
+    router.isBack = false;
+    router.transitionName = "route-back";
+  } else {
+    History.push(to.path);
+    router.transitionName = "route-forward";
   }
 });
 
