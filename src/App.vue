@@ -1,25 +1,45 @@
 <template>
   <div id="app">
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
-    <FormTest></FormTest>
+    <div id="nav">
+      <router-link to="/">Home</router-link>|
+      <router-link to="/about">About</router-link>|
+      <router-link to="/login" v-if="!isLogin">Login</router-link>
+      <span>{{loginState}}</span>
+    </div>
+
+    <div>{{count}}
+      <button @click="onAdd">add</button>
+    </div>
+
+    <router-view/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-import FormTest from './components/FormTest.vue'
+import { mapState, mapGetters } from "vuex";
+
+import store from './kstore';
 
 export default {
-  name: 'app',
-  components: {
-    HelloWorld,FormTest
-  }
-}
+  computed: {
+    ...mapState(["isLogin"]),
+    ...mapGetters(["loginState"]),
+    count(){
+      return store.state.count;
+    }
+  },
+  methods: {
+    onAdd() {
+      store.commit('add')
+    }
+  },
+};
 </script>
+
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
