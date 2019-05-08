@@ -5,7 +5,7 @@
         <router-link :to="`/detail/${good.id}`">
           <span>{{good.text}}</span>
           <span>￥{{good.price}}</span>
-          <button @click.prevent.stop="addCart(good)">加购物车</button>
+          <button @click.prevent.stop="onAddCart(good)">加购物车</button>
         </router-link>
       </li>
     </ul>
@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 export default {
   data() {
     return {
@@ -23,12 +24,14 @@ export default {
     };
   },
   methods: {
-      addCart() {
-          
-      }
-  },
+    ...mapMutations(["addCart"]),
+    onAddCart(good) {
+      this.addCart(good);
+      this.$router.push('/cart')
+    }
+  }
 };
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 </style>

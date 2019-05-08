@@ -4,6 +4,7 @@ import Home from "./views/Home.vue";
 import Login from "./views/Login.vue";
 import List from "./views/List.vue";
 import Detail from "./views/Detail.vue";
+import Cart from "./views/Cart.vue";
 import store from './store';
 
 Vue.use(Router);
@@ -18,6 +19,7 @@ const router = new Router({
       component: Home,
       children: [
         {path: '', component: List},
+        {path: '/cart', component: Cart},
         {path: '/detail/:id', component: Detail, props: true},
       ]
     },

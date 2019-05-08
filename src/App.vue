@@ -11,6 +11,12 @@
       <button @click="onAdd">add</button>
     </div>
 
+    <!-- krouter测试 -->
+    <nav>
+      <router-link to="#/foo">foo</router-link> |
+      <router-link to="#/bar">bar</router-link>
+    </nav>
+
     <router-view/>
   </div>
 </template>
@@ -30,7 +36,7 @@ export default {
   },
   methods: {
     onAdd() {
-      store.commit('add')
+      store.dispatch('add')
     }
   },
 };
