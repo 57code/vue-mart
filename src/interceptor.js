@@ -1,6 +1,7 @@
 import axios from "axios";
+import router from './router';
+import store from './store';
 
-export default function(vm) {
   axios.interceptors.request.use(config => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -12,10 +13,9 @@ export default function(vm) {
   axios.interceptors.response.use(null, err => {
     if (err.response.status === 401) {
       // 清空
-      vm.$store.dispatch("logout");
+      store.dispatch("logout");
       // 跳转
-      vm.$router.push("/login");
+      router.push("/login");
     }
     return Promise.reject(err);
   });
-}

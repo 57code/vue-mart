@@ -15,6 +15,10 @@ export default {
   },
   created(){
     axios.get('/api/userinfo').then(res=>console.log(res.data))
+    .catch(err=>{
+      console.log(err.message);
+      
+    })
   }
 }
 </script>

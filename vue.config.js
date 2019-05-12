@@ -42,7 +42,7 @@ module.exports = {
       //   app.get("/api/userinfo", auth, (req, res) => {
       //     res.json({ code: 1, data: { name: "Jerry" } });
       //   });
-      }
+      // }
     }
   }
 };

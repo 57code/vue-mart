@@ -17,7 +17,7 @@ router.get("/api/login", async ctx => {
     const token = jwt.sign(
       {
         data: { name: "kaikeba" }, // 用户信息数据
-        exp: Math.floor(Date.now() / 1000) + 60 * 60 // 过期时间
+        exp: Math.floor(Date.now() / 1000) + 10 // 过期时间
       },
       secret
     );
