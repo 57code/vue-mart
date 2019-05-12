@@ -35,14 +35,14 @@ module.exports = {
       //     if (req.headers.token) {
       //       next();
       //     } else {
-      //       res.status(401);
+      //       res.sendStatus(401);
       //     }
       //   }
 
       //   app.get("/api/userinfo", auth, (req, res) => {
       //     res.json({ code: 1, data: { name: "Jerry" } });
       //   });
-      // }
+      }
     }
   }
 };
