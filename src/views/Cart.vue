@@ -30,7 +30,7 @@ export default {
   },
   computed: {
     ...mapState({
-      cart: state => state.cart,
+      cart: state => state.cart.list,
       isLogin: state => state.user.isLogin
     }),
     ...mapGetters({
