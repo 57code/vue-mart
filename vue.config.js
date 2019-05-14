@@ -36,7 +36,7 @@ module.exports = {
 
         // 保护接口中间件
         function auth(req, res, next) {
-          if (req.headers.token) {
+          if (req.headers.Authorization) {
             // 已认证
             next()
           } else {
