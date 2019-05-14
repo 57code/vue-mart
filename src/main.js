@@ -5,8 +5,15 @@ import router from './router'
 import store from './store'
 import interceptor from './interceptor'
 
-Vue.config.productionTip = false
+import {createAPI} from 'cube-ui';
+import create from '@/utils/create';
+import CartAnim from '@/components/CartAnim';
 
+// 注册全局组件, $createCartAnim
+createAPI(Vue, CartAnim, ['transitionend'])
+
+Vue.config.productionTip = false
+Vue.prototype.$create = create;
 
 const app = new Vue({
   router,

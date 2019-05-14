@@ -33,9 +33,7 @@ export default {
       cart: state => state.cart.list,
       isLogin: state => state.user.isLogin
     }),
-    ...mapGetters({
-      total: "total"
-    })
+    ...mapGetters(['total'])
   },
   methods: {
     addCart(index) {

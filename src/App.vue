@@ -1,17 +1,25 @@
 <template>
   <div id="app">
-    <transition name="route-move">
+    <transition :name="transitionName">
       <router-view class="child-view"/>
     </transition>
     <cube-tab-bar v-model="selectLabel" :data="tabs" @change="changeHandler">
+      <cube-tab v-for="(item, index) in tabs" 
+        	:icon="item.icon" :label="item.value" :key="index">
+        	<div>{{item.label}}</div>
+        	<span class="badge" v-if="item.label=='Cart'">{{cartTotal}}</span>
+        </cube-tab>
     </cube-tab-bar>
   </div>
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
+
 export default {
   data() {
     return {
+      transitionName: 'route-forward',
       selectLabel: "/",
       tabs: [
         {
@@ -40,12 +48,17 @@ export default {
     $route(route) {
       // 监听路由变化并动态设置页签选中状态
       this.selectLabel = route.path;
+
+      this.transitionName = this.$router.transitionName
     }
   },
   methods: {
     changeHandler(val) {
       this.$router.push(val);
     }
+  },
+  computed: {
+    ...mapGetters(['cartTotal'])
   },
 };
 </script>
@@ -64,17 +77,39 @@ export default {
 }
 
 // 动画
-.route-move-enter { // 入场前状态
+// .route-move-enter { // 入场前状态
+//   transform: translate3d(-100%, 0, 0);
+// }
+
+// .route-move-leave-to { // 离场后状态
+//   transform: translate3d(100%, 0, 0);
+// }
+
+// .route-move-enter-active, .route-move-leave-active { // 激活状态
+//   transition: transform 0.3s;
+// }
+
+.route-forward-enter {
   transform: translate3d(-100%, 0, 0);
 }
-
-.route-move-leave-to { // 离场后状态
+.route-back-enter {
   transform: translate3d(100%, 0, 0);
 }
-
-.route-move-enter-active, .route-move-leave-active { // 激活状态
+/* 出场后 */
+.route-forward-leave-to {
+  transform: translate3d(100%, 0, 0);
+}
+.route-back-leave-to {
+  transform: translate3d(-100%, 0, 0);
+}
+.route-forward-enter-active,
+.route-forward-leave-active,
+.route-back-enter-active,
+.route-back-leave-active {
   transition: transform 0.3s;
 }
+
+
 
 .child-view { // 添加到每个页面上的样式，确保页面间不挤占位置
   position: absolute;

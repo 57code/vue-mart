@@ -3,9 +3,14 @@ import Router from "vue-router";
 import Home from "./views/Home.vue";
 import Login from "./views/Login.vue";
 import Cart from "./views/Cart.vue";
+import History from "@/utils/history";
 
 Vue.use(Router);
-
+Vue.use(History);
+Router.prototype.goBack = function() {
+  this.back();
+  this.isBack = true;
+}
 const router = new Router({
   mode: "history",
   base: process.env.BASE_URL,
@@ -58,5 +63,16 @@ router.beforeEach((to, from, next) => {
     next();
   }
 });
+
+router.afterEach((to, from) => {
+  if (router.isBack) {
+    History.pop();
+    router.isBack = false;
+    router.transitionName = 'route-back';
+  } else {
+    History.push(to.path);
+    router.transitionName = 'route-forward';
+  }
+})
 
 export default router;
